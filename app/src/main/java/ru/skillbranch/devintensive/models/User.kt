@@ -23,7 +23,7 @@ data class User(
     }
     companion object Factory{
         private var lastId=-1
-        fun makeUser (fullName:String?): User? {
+        fun makeUser (fullName:String?): User {
             lastId++
             var (firstName, lastName)= Utils.parseFullName(fullName)
             return User(id= "$lastId", firstName = firstName, lastName = lastName)
