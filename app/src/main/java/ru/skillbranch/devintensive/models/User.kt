@@ -10,8 +10,8 @@ data class User(
     var avatar:String?,
     var rating:Int=0,
     var respect:Int=0,
-    val lastVisit:Date?=null,
-    val isOnline:Boolean=false
+    var lastVisit:Date?=Date(),
+    var isOnline:Boolean=false
 ) {
 
 
@@ -23,9 +23,8 @@ data class User(
     }
     companion object Factory{
         private var lastId=-1
-        fun makeUser (fullName:String?):User{
+        fun makeUser (fullName:String?): User? {
             lastId++
-
             var (firstName, lastName)= Utils.parseFullName(fullName)
             return User(id= "$lastId", firstName = firstName, lastName = lastName)
         }
