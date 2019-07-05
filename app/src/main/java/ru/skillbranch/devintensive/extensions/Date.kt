@@ -109,15 +109,17 @@ enum class TimeUnits{
 
 
 fun Date.humanizeDiff(date:Date = Date()): String? {
-
     var output:String=" "
     var result=date.time - this.time
+    println("после вычисления результат: $result")
     if (result<0) {
+        println("результат определился отрицательным")
+        result=result*-1
         when (result) {
-            in 0..-1200 -> output="только что"
-            in -1201..-45200 -> output="через несколько секунд"
-            in -45201..-75200 -> output="через минуту"
-            in -75201..-2700200 -> {var n:Long=result/-60000
+            in 0..1200 -> output="только что"
+            in 1201..45200 -> output="через несколько секунд"
+            in 45201..75200 -> output="через минуту"
+            in 75201..2700200 -> {var n:Long=result/60000
                 var nI=n.toDouble().toInt()
                 when (nI) {
                     1 -> output="через $nI минуту"
@@ -126,8 +128,8 @@ fun Date.humanizeDiff(date:Date = Date()): String? {
                     else if ((nI.toString().endsWith("2")) or (nI.toString().endsWith("3")) or (nI.toString().endsWith("4"))) {output="через $nI минуты"}
                     else output="через $nI минут"}
             }
-            in -2700201..-4500200 -> output="через час"
-            in -4500201..-79200200 -> {var n:Long=result/-60000/60
+            in 2700201..4500200 -> output="через час"
+            in 4500201..79200200 -> {var n:Long=result/60000/60
                 var nI=n.toDouble().toInt()
                 when (nI) {
                     1 -> output="через $nI час"
@@ -136,8 +138,8 @@ fun Date.humanizeDiff(date:Date = Date()): String? {
                     else if ((nI.toString().endsWith("2")) or (nI.toString().endsWith("3")) or (nI.toString().endsWith("4"))) {output="через $nI часа"}
                     else output="через $nI часов"}
             }
-            in -79200201..-93600200 -> output="через день"
-            in -93600201..-31104000054 -> {var n:Long=result/-60000/60/24
+            in 79200201..93600200 -> output="через день"
+            in 93600201..31104000054 -> {var n:Long=result/60000/60/24
                 var nI=n.toDouble().toInt()
                 when (nI) {
                     1 -> output="через $nI день"
@@ -145,7 +147,7 @@ fun Date.humanizeDiff(date:Date = Date()): String? {
                     else -> if (nI.toString().endsWith("1")) {output="через $nI день"}
                     else if ((nI.toString().endsWith("2")) or (nI.toString().endsWith("3")) or (nI.toString().endsWith("4"))) {output="через $nI дня"}
                     else output="через $nI дней"}}
-            else -> output="более года назад"
+            else -> output="через более года"
         }
     } else {
     when (result) {

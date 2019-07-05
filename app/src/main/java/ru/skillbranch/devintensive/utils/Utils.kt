@@ -18,8 +18,12 @@ object Utils {
             return " "
     }
 
-    fun toInitials(firstName:String?, lastname:String?): String? {
-        val initials:String ="${if (firstName.isNullOrEmpty()) "" else firstName?.getOrNull(0)?.toUpperCase().toString()}"+"${if (lastname.isNullOrEmpty()) "" else lastname?.getOrNull(0)?.toUpperCase().toString()}"
+    fun toInitials(firstName:String?, lastName:String?): String? {
+        var _firstName:String?=firstName?.trim()
+        var _lastName:String?=lastName?.trim()
+        val initials:String ="${if (_firstName.isNullOrEmpty()) ""
+        else
+            _firstName?.getOrNull(0)?.toUpperCase().toString()}"+"${if (_lastName.isNullOrEmpty()) "" else _lastName?.getOrNull(0)?.toUpperCase().toString()}"
         if (initials.isNullOrEmpty()) return null else
         return initials
     }
